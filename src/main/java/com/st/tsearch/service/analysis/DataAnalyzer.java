@@ -39,7 +39,7 @@ public class DataAnalyzer {
         Set<Integer> tokenSizes = Dictionary.getTokenSize();
         for (Integer tokenSize : tokenSizes) {
             int start = 0, end;
-            while ((end = ++start + tokenSize - 1) < contentLength) {
+            while ((end = ++start + tokenSize - 1) <= contentLength) {
                 String tmp = content.substring(start - 1, end);
                 if (Dictionary.isContains(tmp)) {
                     tokens.add(tmp);

@@ -50,7 +50,7 @@ public class DocumentSearchServiceImpl implements IDocumentSearchService {
 
         Set<String> docSet = ConcurrentHashMap.newKeySet();
         List<String> keywordList = param.getKeywordList();
-        if (!CollectionUtils.isEmpty(keywordList)) {
+        if (CollectionUtils.isEmpty(keywordList)) {
             log.warn("No keyword found");
             return DocSearchResponse.of(new ArrayList<>());
         }

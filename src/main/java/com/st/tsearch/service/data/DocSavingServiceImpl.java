@@ -2,6 +2,7 @@ package com.st.tsearch.service.data;
 
 import com.st.tsearch.common.NodeState;
 import com.st.tsearch.common.utils.DataUtils;
+import com.st.tsearch.common.utils.XXHash;
 import com.st.tsearch.model.cluster.NodeInfo;
 import com.st.tsearch.model.doc.DocUnit;
 import com.st.tsearch.model.save.DocSaveResponse;
@@ -65,7 +66,9 @@ public class DocSavingServiceImpl implements IDocSavingService {
 
         // generate docId if it doesn't exist
         List<String> docIds = docUnits.stream()
+                .filter(unit -> StringUtils.isNotBlank(unit.getContent()))
                 .peek(unit -> unit.setDocId(StringUtils.isBlank(unit.getDocId()) ? DataUtils.initId() : unit.getDocId()))
+                .peek(unit -> unit.setHash(XXHash.getXXHash(unit.getContent())))
                 .map(DocUnit::getDocId)
                 .collect(Collectors.toList());
 
@@ -85,8 +88,8 @@ public class DocSavingServiceImpl implements IDocSavingService {
         log.info("Saved {} docs by node:[{}], ss:{}, fa:{}"
                 , docUnits.size()
                 , finalResponse.getNodeId()
-                , faResponse.getSuccess().size()
-                , faResponse.getFailure().size()
+                , finalResponse.getSuccess().size()
+                , finalResponse.getFailure().size()
         );
         return finalResponse;
     }

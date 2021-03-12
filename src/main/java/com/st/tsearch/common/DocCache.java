@@ -12,12 +12,14 @@ public class DocCache {
     public static boolean addDoc(DocUnit docUnit) {
         String docId = docUnit.getDocId();
         if (!cache.containsKey(docId)) {
+            docUnit.setVersion(1);
             cache.put(docId, docUnit);
             return true;
         }
 
         DocUnit old = cache.get(docId);
         if (old.getVersion() <= docUnit.getVersion()) {
+            docUnit.setVersion(old.getVersion() + 1);
             cache.put(docId, docUnit);
             return true;
         }
