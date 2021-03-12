@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: tsearch
+  profiles:
+    active: prd
+
+logging:
+  config: classpath:logback-spring.xml
+
+http:
+  defaultMaxPerRoute: 20
+  maxTotal: 100
+  staleConnectionCheckEnabled: true
+  socketTimeout: 10000
+  connectTimeout: 1000
+  connectionRequestTimeout: 500
