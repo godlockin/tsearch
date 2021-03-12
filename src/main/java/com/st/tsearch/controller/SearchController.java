@@ -2,7 +2,8 @@ package com.st.tsearch.controller;
 
 import com.st.tsearch.model.doc.DocUnit;
 import com.st.tsearch.model.search.DocRetrieveParam;
-import com.st.tsearch.model.search.DocSearchParam;
+import com.st.tsearch.model.search.KeywordListSearchParam;
+import com.st.tsearch.model.search.KeywordSearchParam;
 import com.st.tsearch.model.search.DocSearchResponse;
 import com.st.tsearch.service.IDocumentSearchService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +30,19 @@ public class SearchController {
      * @return target docIds
      */
     @RequestMapping(value = { "/_keywordSearch" }, method = RequestMethod.POST)
-    public ResponseEntity<DocSearchResponse> keywordSearch(@RequestBody DocSearchParam param) {
+    public ResponseEntity<DocSearchResponse> keywordSearch(@RequestBody KeywordSearchParam param) {
         return ResponseEntity.ok(documentSearchService.keywordSearch(param));
+    }
+
+    /**
+     * Search function for keyword list search
+     *
+     * @param param search params
+     * @return target docIds
+     */
+    @RequestMapping(value = { "/_keywordListSearch" }, method = RequestMethod.POST)
+    public ResponseEntity<DocSearchResponse> keywordListSearch(@RequestBody KeywordListSearchParam param) {
+        return ResponseEntity.ok(documentSearchService.keywordListSearch(param));
     }
 
     /**
@@ -40,7 +52,7 @@ public class SearchController {
      * @return target docIds
      */
     @RequestMapping(value = { "/_search" }, method = RequestMethod.POST)
-    public ResponseEntity<DocSearchResponse> normalSearch(@RequestBody DocSearchParam param) {
+    public ResponseEntity<DocSearchResponse> normalSearch(@RequestBody KeywordSearchParam param) {
         return ResponseEntity.ok(documentSearchService.search(param));
     }
 

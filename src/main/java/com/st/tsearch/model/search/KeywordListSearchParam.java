@@ -5,15 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Query param for doc search
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocSearchParam extends BaseParam {
-    /**
-     * Query string
-     */
-    private String query;
+public class KeywordListSearchParam extends BaseParam {
+
+    private List<String> keywordList = new ArrayList<>();
 }

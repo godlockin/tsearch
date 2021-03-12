@@ -25,11 +25,11 @@ public class DictLoadingJob {
 
     @PostConstruct
     void init() {
-        loadDictItems();
+        String filePath = NodeConfig.getAsString("NODE#DICT_PATH", FILE_PATH);
+        loadDictItems(filePath);
     }
 
-    private void loadDictItems() {
-        String filePath = NodeConfig.getAsString("NODE#DICT_PATH", FILE_PATH);
+    private void loadDictItems(String filePath) {
         if (!FileUtils.fileExists(filePath)) {
             log.error("No dict file found");
             return;

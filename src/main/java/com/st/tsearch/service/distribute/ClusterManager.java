@@ -29,6 +29,8 @@ public class ClusterManager {
 
     @Value("${NODE_ID:}")
     private String NODE_ID;
+    @Value("${NODE_PORT:8080}")
+    private Integer NODE_PORT = 0;
 
     @Value("${CONFIG_PATH:./data/config/clusterInfo.txt}")
     private String CONFIG_PATH;
@@ -111,7 +113,13 @@ public class ClusterManager {
         // init basic info for node itself
         String ip = HostUtils.getIp();
         String hostname = HostUtils.getHostName();
-        Integer port = HostUtils.getPort();
+        Integer port = NODE_PORT;
+
+        if (0 >= port) {
+            String portStr = config.getOrDefault("NODE#NODE_PORT", "8080");
+            port = Integer.parseInt(portStr);
+            NODE_PORT = port;
+        }
 
         // if nodeId isn't exists
         if (StringUtils.isBlank(NODE_ID)) {

@@ -2,7 +2,8 @@ package com.st.tsearch.service;
 
 import com.st.tsearch.model.doc.DocUnit;
 import com.st.tsearch.model.search.DocRetrieveParam;
-import com.st.tsearch.model.search.DocSearchParam;
+import com.st.tsearch.model.search.KeywordListSearchParam;
+import com.st.tsearch.model.search.KeywordSearchParam;
 import com.st.tsearch.model.search.DocSearchResponse;
 
 import java.util.List;
@@ -18,7 +19,15 @@ public interface IDocumentSearchService {
      * @param param doc search param
      * @return docId list against the param
      */
-    DocSearchResponse keywordSearch(DocSearchParam param);
+    DocSearchResponse keywordSearch(KeywordSearchParam param);
+
+    /**
+     * Searching docs against the keyword list
+     *
+     * @param param doc search param
+     * @return docId list against the param
+     */
+    DocSearchResponse keywordListSearch(KeywordListSearchParam param);
 
     /**
      * Searching docs against the query, the differences from keyword search is:
@@ -27,7 +36,7 @@ public interface IDocumentSearchService {
      * @param param doc search param
      * @return docId list against the param
      */
-    DocSearchResponse search(DocSearchParam param);
+    DocSearchResponse search(KeywordSearchParam param);
 
     /**
      * Retrieve the doc against the docId
