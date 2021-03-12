@@ -220,4 +220,5 @@ It also offers a group of api for searching documents and tracing the system.
 3. involve doc index's persistence & reload
 4. involve other ways of dictionary initialization
 5. add system monitor thread & api
-6. involve docker deploy to simulate the cluster 
+6. involve docker deploy
+7. add cached data persistence
