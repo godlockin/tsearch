@@ -15,6 +15,7 @@ public class DocUnit {
     protected int docLength;
     protected String content;
     protected long version = -1;
+    protected boolean load = false;
 
     @Override
     public String toString() {

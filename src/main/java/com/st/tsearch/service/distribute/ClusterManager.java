@@ -191,6 +191,11 @@ public class ClusterManager {
             NodeConfig.set("NODE#DICT_PATH", DICT_PATH);
         }
 
+        String CACHE_FILE_PATH = config.getOrDefault("NODE#CACHE_FILE_PATH", "");
+        if (StringUtils.isNotBlank(CACHE_FILE_PATH)) {
+            NodeConfig.set("NODE#CACHE_FILE_PATH", CACHE_FILE_PATH);
+        }
+
         return config;
     }
 }

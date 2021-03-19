@@ -66,23 +66,12 @@ public class DocIndexingService {
                     String docContent = String.join("\n", sentences);
                     String hash = XXHash.getXXHash(docContent);
 
-                    Map<String, Object> data = new HashMap<>();
-                    data.put("dataType", "fileBase");
-                    data.put("hash", hash);
-                    data.put("content", docContent);
-
-                    Map<String, Object> meta = new HashMap<>();
-                    meta.put("title", file.getTitle());
-                    meta.put("fileName", file.getFileName());
-                    meta.put("filePath", file.getFilePath());
-                    data.put("meta", meta);
-
-                    String cacheData = JSON.toJSONString(data);
                     DocUnit docUnit = new DocUnit(docId
                             , hash
                             , docContent.length()
-                            , cacheData
+                            , docContent
                             , timestamp
+                            , false
                     );
 
                     if (DocSaver.push(docUnit)) {
